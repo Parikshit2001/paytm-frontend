@@ -8,6 +8,7 @@ import {
 } from "../components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../constants/constants";
 
 function Signin() {
   const navigate = useNavigate();
@@ -23,10 +24,7 @@ function Signin() {
     setUsername("");
     setPassword("");
     console.log(postData);
-    const response = await axios.post(
-      "http://localhost:3000/api/v1/user/signin",
-      postData
-    );
+    const response = await axios.post(`${URL}/api/v1/user/signin`, postData);
     localStorage.setItem("token", response.data.token);
     navigate("/dashboard");
   };

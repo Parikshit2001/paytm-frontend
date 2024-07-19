@@ -1,27 +1,32 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { URL } from "../constants/constants";
 
 function SendMoney() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const name = searchParams.get("name");
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState("");
 
   const handeClick = async () => {
     const requestBody = {
       to: id,
-      amount: amount
-    }
+      amount: amount,
+    };
     const requestConfig = {
       headers: {
-        authorization: "Bearer " + localStorage.getItem("token")
-      }
-    }
-    const response = await axios.post("http://localhost:3000/api/v1/account/transfer", requestBody, requestConfig)
-    console.log(response.data)
-    setAmount(0)
-  }
+        authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    const response = await axios.post(
+      `${URL}/api/v1/account/transfer`,
+      requestBody,
+      requestConfig
+    );
+    console.log(response.data);
+    setAmount(0);
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-50">
@@ -54,7 +59,9 @@ function SendMoney() {
           </div>
           <div className="mt-4">
             <div className="border bg-green-500 rounded-lg py-2">
-              <button onClick={handeClick} className="w-full text-white">Initiate Transfer</button>
+              <button onClick={handeClick} className="w-full text-white">
+                Initiate Transfer
+              </button>
             </div>
           </div>
         </div>

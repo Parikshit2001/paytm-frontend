@@ -8,10 +8,10 @@ import {
 } from "../components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../constants/constants";
 
 function Signup() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -25,9 +25,9 @@ function Signup() {
       username,
       password,
     };
-    const response = await axios.post("http://localhost:3000/api/v1/user/signup", postData);
-    localStorage.setItem("token", response.data.token)
-    navigate("/dashboard")
+    const response = await axios.post(`${URL}/api/v1/user/signup`, postData);
+    localStorage.setItem("token", response.data.token);
+    navigate("/dashboard");
   };
 
   return (
